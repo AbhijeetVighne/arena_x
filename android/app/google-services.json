@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "556888706503",
+    "project_id": "arenax-d3bc1",
+    "storage_bucket": "arenax-d3bc1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:556888706503:android:8f1a1744702e43fc095de2",
+        "android_client_info": {
+          "package_name": "com.example.arena_x"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdgwREb0F59uPpbEvIP8aO_X7VEWUbZIw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
