@@ -10,6 +10,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class LoginScreenState extends State<LoginScreen> {
+
   Future<void> _signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -42,17 +43,53 @@ class LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text(
+              "ArenaX",
+              style: TextStyle(
+                fontSize: 40,
+                fontWeight: FontWeight.bold,
+                color: Colors.greenAccent,
+                fontFamily: "Orbitron", // A futuristic font
+              ),
+            ),
+            SizedBox(height: 30),
             ElevatedButton(
               onPressed: _signInWithGoogle,
-              child: Text("Sign in with Google"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.redAccent,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.g_mobiledata, color: Colors.white),
+                  SizedBox(width: 10),
+                  Text("Sign in with Google", style: TextStyle(fontSize: 18, color: Colors.white)),
+                ],
+              ),
             ),
+            SizedBox(height: 15),
             ElevatedButton(
               onPressed: _signInWithFacebook,
-              child: Text("Sign in with Facebook"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blueAccent,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.facebook, color: Colors.white),
+                  SizedBox(width: 10),
+                  Text("Sign in with Facebook", style: TextStyle(fontSize: 18, color: Colors.white)),
+                ],
+              ),
             ),
           ],
         ),
