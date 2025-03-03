@@ -29,11 +29,20 @@ class LoginScreenState extends State<LoginScreen> {
 
   Future<void> _signInWithFacebook() async {
     try {
-      final LoginResult result = await FacebookAuth.instance.login();
+      final LoginResult result = await FacebookAuth.instance.login(permissions: ['email', 'public_profile'],);
+
       if (result.status == LoginStatus.success) {
-        final AccessToken accessToken = result.accessToken!;
-        final OAuthCredential credential = FacebookAuthProvider.credential(accessToken.tokenString);
-        await FirebaseAuth.instance.signInWithCredential(credential);
+        final AccessToken? accessToken = result.accessToken;
+
+        if (accessToken != null) {
+          final OAuthCredential credential = FacebookAuthProvider.credential(accessToken.tokenString);
+          await FirebaseAuth.instance.signInWithCredential(credential);
+          debugPrint("Facebook Sign-In Successful: ${FirebaseAuth.instance.currentUser?.displayName}");
+        } else {
+          debugPrint("AccessToken is null");
+        }
+      } else {
+        debugPrint("Facebook Login Failed: ${result.message}");
       }
     } catch (e) {
       debugPrint("Facebook Sign-In Error: $e");
