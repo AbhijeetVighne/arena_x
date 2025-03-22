@@ -13,7 +13,7 @@ dependencies {
 
 android {
     namespace = "com.example.arena_x"
-    compileSdk = 34
+    compileSdk = 35
     ndkVersion = "27.0.12077973"
 
     compileOptions {
