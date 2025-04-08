@@ -1,6 +1,8 @@
+import 'package:arena_x/services/firebase_service.dart';
+import 'package:arena_x/services/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/team_model.dart';
-import '../services/firebase_service.dart';
+
 import 'auth_provider.dart';
 
 // Get teams for the current user with auto-refresh

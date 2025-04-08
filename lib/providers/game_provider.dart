@@ -1,6 +1,6 @@
+import 'package:arena_x/services/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/game_model.dart';
-import '../services/firebase_service.dart';
 
 // Get all games
 final gamesProvider = FutureProvider<List<GameModel>>((ref) async {

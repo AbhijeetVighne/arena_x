@@ -1,3 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+part 'user_model.g.dart';
+
+@JsonSerializable()
 class UserModel {
   final String id;
   final String username;
@@ -34,36 +40,22 @@ class UserModel {
     return followerIds.contains(otherUserId) && followingIds.contains(otherUserId);
   }
 
-  factory UserModel.fromMap(Map<String, dynamic> map) {
-    return UserModel(
-      id: map['id'] ?? '',
-      username: map['username'] ?? '',
-      profileImageUrl: map['profileImageUrl'],
-      walletBalance: (map['walletBalance'] ?? 0.0).toDouble(),
-      favoriteGameIds: List<String>.from(map['favoriteGameIds'] ?? []),
-      followerIds: List<String>.from(map['followerIds'] ?? []),
-      followingIds: List<String>.from(map['followingIds'] ?? []),
-      posts: map['posts'] ?? 0,
-      matchesPlayed: map['matchesPlayed'] ?? 0,
-      matchesWon: map['matchesWon'] ?? 0,
-      coupons: map['coupons'] ?? 0,
-    );
+  static UserModel error = UserModel(id: '', username: '');
+
+  // For json_serializable
+  factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
+  Map<String, dynamic> toJson() => _$UserModelToJson(this);
+
+  // For Firestore .withConverter
+  factory UserModel.fromFirestore(DocumentSnapshot<Map<String, dynamic>> docSnap, _) {
+    final data = docSnap.data()!;
+    return UserModel.fromJson({...data, 'uid': docSnap.id}); // embed id
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'username': username,
-      'profileImageUrl': profileImageUrl,
-      'walletBalance': walletBalance,
-      'favoriteGameIds': favoriteGameIds,
-      'followerIds': followerIds,
-      'followingIds': followingIds,
-      'posts': posts,
-      'matchesPlayed': matchesPlayed,
-      'matchesWon': matchesWon,
-      'coupons': coupons,
-    };
+  Map<String, dynamic> toFirestore() {
+    final data = toJson();
+    data.remove('uid'); // don't store UID inside document fields
+    return data;
   }
 
   UserModel copyWith({
