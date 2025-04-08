@@ -1,13 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import '../models/user_model.dart';
 import 'firebase_service.dart';
-
-final paymentServiceProvider = Provider<PaymentService>((ref) {
-  final firebaseService = ref.watch(firebaseServiceProvider);
-  return PaymentService(firebaseService);
-});
 
 class PaymentService {
   final FirebaseService _firebaseService;

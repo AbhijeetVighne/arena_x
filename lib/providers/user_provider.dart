@@ -1,6 +1,8 @@
+import 'package:arena_x/services/firebase_service.dart';
+import 'package:arena_x/services/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/user_model.dart';
-import '../services/firebase_service.dart';
+
 import 'auth_provider.dart';
 
 final userDataProvider = FutureProvider.autoDispose<UserModel?>((ref) async {

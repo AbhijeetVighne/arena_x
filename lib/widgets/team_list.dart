@@ -1,3 +1,4 @@
+import 'package:arena_x/services/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/game_model.dart';
@@ -6,7 +7,6 @@ import '../models/user_model.dart';
 import '../providers/game_provider.dart';
 import '../providers/team_provider.dart';
 import '../providers/user_provider.dart';
-import '../services/firebase_service.dart';
 
 class TeamList extends ConsumerStatefulWidget {
   final String userId;

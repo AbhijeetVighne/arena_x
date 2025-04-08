@@ -1,7 +1,8 @@
+import 'package:arena_x/services/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/user_model.dart';
-import '../services/firebase_service.dart';
+
 
 class FollowUserTile extends ConsumerStatefulWidget {
   final UserModel user;

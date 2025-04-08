@@ -1,14 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/user_model.dart';
 import '../models/game_model.dart';
 import '../models/team_model.dart';
 import '../models/post_model.dart';
-
-final firebaseServiceProvider = Provider<FirebaseService>((ref) {
-  return FirebaseService();
-});
 
 class FirebaseService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -33,14 +28,14 @@ class FirebaseService {
             followingIds: [],
           );
 
-          await _firestore.collection('users').doc(userId).set(newUser.toMap());
+          await _firestore.collection('users').doc(userId).set(newUser.toFirestore());
           return newUser;
         }
         return null;
       }
 
       final data = docSnapshot.data() as Map<String, dynamic>;
-      return UserModel.fromMap({...data, 'id': userId});
+      return UserModel.fromJson({...data, 'id': userId});
     } catch (e) {
       print('Error getting user data: $e');
       return null;
@@ -48,7 +43,7 @@ class FirebaseService {
   }
 
   Future<void> updateUserData(UserModel user) async {
-    await _firestore.collection('users').doc(user.id).update(user.toMap());
+    await _firestore.collection('users').doc(user.id).update(user.toFirestore());
   }
 
   // Follow/Unfollow methods
@@ -136,7 +131,7 @@ class FirebaseService {
         .get();
 
     return querySnapshot.docs.map((doc) {
-      return UserModel.fromMap({...doc.data(), 'id': doc.id});
+      return UserModel.fromJson({...doc.data(), 'id': doc.id});
     }).toList();
   }
 

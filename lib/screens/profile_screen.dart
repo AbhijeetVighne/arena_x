@@ -1,11 +1,10 @@
+import 'package:arena_x/services/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/user_model.dart';
 import '../providers/user_provider.dart';
 import '../providers/post_provider.dart';
-import '../providers/game_provider.dart';
 import '../providers/team_provider.dart';
-import '../services/payment_service.dart';
 import '../widgets/profile_header.dart';
 import '../widgets/stat_counter.dart';
 import '../widgets/post_grid.dart';
